@@ -33,16 +33,16 @@ pipeline {
                   
                   //sh 'Using Two Different Syntax while Building Images'
                   //sh 'docker build -f ~/site_v1_for_canary_deployment/Dockerfile --tag=sk_clouddevops_capstone_img_v1 '
+                 script {  
+                   docker.withRegistry('https://registry.hub.docker.com', 'novavic-docker-hub-credentials') {
+                      //app.push("${env.BUILD_NUMBER}")
+                      //app.push("latest")
 
-                 docker.withRegistry('https://registry.hub.docker.com', 'novavic-docker-hub-credentials') {
-                   //app.push("${env.BUILD_NUMBER}")
-                   //app.push("latest")
-                   script {  
                         def image1 = docker.build("sk_clouddevops_capstone_img_v1:1.0", "~/site_v1_for_canary_deployment/Dockerfile")
-                        image1.push()
+                        image1.push("sk_clouddevops_capstone_img_v1:1.0")
 
-                        def image2 = docker.build("sk_clouddevops_capstone_img_v2:1.0", "~/site_v2_for_canary_deployment/Dockerfile")
-                        image2.push()
+                        //def image2 = docker.build("sk_clouddevops_capstone_img_v2:1.0", "~/site_v2_for_canary_deployment/Dockerfile")
+                        //image2.push()
                    } 
                  }
               }
