@@ -1,7 +1,7 @@
 pipeline {
      agent any
      stages {
-         stage('checkout') {
+         stage('checkout from version control system') {
              steps {
                  sh '''
                    rm -rf site_v1_for_canary_deployment
