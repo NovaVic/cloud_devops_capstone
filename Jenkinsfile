@@ -15,8 +15,8 @@ pipeline {
          }
          stage('Lint HTML') {
               steps {
-                  sh 'tidy -q -e ./site_v1_for_canary_deployment/index.html'
-                  sh 'tidy -q -e ./site_v2_for_canary_deployment/index.html'
+                  sh 'tidy -q -e ~/site_v1_for_canary_deployment/index.html'
+                  sh 'tidy -q -e ~/site_v2_for_canary_deployment/index.html'
               }
          }
          stage('Lint Dockerfile') {
@@ -32,7 +32,7 @@ pipeline {
                   // https://www.jenkins.io/doc/book/pipeline/docker/
                   
                   //sh 'Using Two Different Syntax while Building Images'
-                  //sh 'docker build -f ./site_v1_for_canary_deployment/Dockerfile --tag=sk_clouddevops_capstone_img_v1 '
+                  //sh 'docker build -f ~/site_v1_for_canary_deployment/Dockerfile --tag=sk_clouddevops_capstone_img_v1 '
                    script {  
                       docker.withRegistry('https://registry.hub.docker.com', 'novavic-docker-hub-credentials') {
                         //app.push("${env.BUILD_NUMBER}")
