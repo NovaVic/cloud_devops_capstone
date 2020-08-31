@@ -53,7 +53,7 @@ pipeline {
             steps {
                   withAWS(region:'us-west-2',credentials:'aws-static') {
                        sh '''
-                         ~/create_cluster.sh
+                         ~/cloud_devops_capstone/create_cluster.sh
                          aws eks --region us-west-2 update-kubeconfig --name alphabetsoup
                          kubectl apply -f ~/cloud_devops_capstone/deployment.yaml
                          kubectl apply -f ~/cloud_devops_capstone/load-balancer-service.yaml
