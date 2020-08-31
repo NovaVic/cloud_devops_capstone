@@ -15,17 +15,17 @@ spec:
 apiVersion: v1.1
 kind: Deployment
 metadata:
-  name: soupvsalphabet-v1
+  name: soup
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: soupvsalphabet
+        app: soup
         version: v1
     spec:
       containers:
-      - name: soupvsalphabet
+      - name: soup
         image:  novavic/clouddevops_capstone-img-v1:1.0
         imagePullPolicy: IfNotPresent
         ports:
@@ -34,17 +34,17 @@ spec:
 apiVersion: v1.2
 kind: Deployment
 metadata:
-  name: soupvsalphabet-v2
+  name: alphabet
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: soupvsalphabet
+        app: alphabet
         version: v2
     spec:
       containers:
-      - name: soupvsalphabet
+      - name: alphabet
         image:  novavic/clouddevops_capstone-img-v2:1.0
         imagePullPolicy: IfNotPresent
         ports:
