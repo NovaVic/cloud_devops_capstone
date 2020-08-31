@@ -14,7 +14,7 @@ pipeline {
          }
          stage('Lint HTML') {
               steps {
-                  sh 'tidy -q -e https://raw.githubusercontent.com/NovaVic/site_v1_for_canary_deployment/master/index.html'
+                  sh 'tidy -q -e ./site_v1_for_canary_deployment/index.html'
                   sh 'tidy -q -e ./site_v2_for_canary_deployment/index.html'
               }
          }
