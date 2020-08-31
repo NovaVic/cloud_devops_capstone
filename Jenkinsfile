@@ -38,10 +38,10 @@ pipeline {
                       //app.push("${env.BUILD_NUMBER}")
                       //app.push("latest")
 
-                        def image1 = docker.build("sk_clouddevops_capstone_img_v1:1.0", "~/site_v1_for_canary_deployment/")
+                        def image1 = docker.build("novavic/clouddevops_capstone-img-v1:1.0", "~/site_v1_for_canary_deployment/")
                         image1.push()
 
-                        def image2 = docker.build("sk_clouddevops_capstone_img_v2:1.0", "~/site_v2_for_canary_deployment/")
+                        def image2 = docker.build("novavic/clouddevops_capstone-img-v2:1.0", "~/site_v2_for_canary_deployment/")
                         image2.push()
                    } 
                  }
