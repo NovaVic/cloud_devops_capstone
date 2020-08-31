@@ -6,6 +6,7 @@ pipeline {
                  sh '''
                    rm -rf site_v1_for_canary_deployment
                    rm -rf site_v2_for_canary_deployment
+                   cd ~
                    git clone https://github.com/NovaVic/site_v1_for_canary_deployment.git
                    git clone https://github.com/NovaVic/site_v2_for_canary_deployment.git 
                 '''
@@ -20,8 +21,8 @@ pipeline {
          }
          stage('Lint Dockerfile') {
               steps {
-                  sh 'hadolint ./site_v1_for_canary_deployment/Dockerfile'
-                  sh 'hadolint ./site_v1_for_canary_deployment/Dockerfile'
+                  sh 'hadolint ~/site_v1_for_canary_deployment/Dockerfile'
+                  sh 'hadolint ~/site_v1_for_canary_deployment/Dockerfile'
               }
          }
          stage('Build and push Docker Image') {
@@ -37,10 +38,10 @@ pipeline {
                         //app.push("${env.BUILD_NUMBER}")
                         //app.push("latest")
 
-                        def image1 = docker.build("sk_clouddevops_capstone_img_v1:1.0", "./site_v1_for_canary_deployment/")
+                        def image1 = docker.build("sk_clouddevops_capstone_img_v1:1.0", "~/site_v1_for_canary_deployment/Dockerfile")
                         image1.push()
 
-                        def image2 = docker.build("sk_clouddevops_capstone_img_v2:1.0", "./site_v2_for_canary_deployment/")
+                        def image2 = docker.build("sk_clouddevops_capstone_img_v2:1.0", "~/site_v2_for_canary_deployment/Dockerfile")
                         image2.push()
                       } 
                    }
