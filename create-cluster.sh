@@ -1,3 +1,5 @@
+
+# https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
 eksctl create cluster \
 --name alphabetsoup \
 --version 1.17 \
