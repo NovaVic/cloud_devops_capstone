@@ -9,6 +9,7 @@ pipeline {
                    cd ~
                    git clone https://github.com/NovaVic/site_v1_for_canary_deployment.git 
                    git clone https://github.com/NovaVic/site_v2_for_canary_deployment.git 
+                   git clone https://github.com/NovaVic/cloud_devops_capstone.git
                 '''
 
              }
@@ -47,6 +48,17 @@ pipeline {
                  }
               }
          }
-
+         stage('create cluster and deploy app using blue green deployment') {
+            steps {
+                  withAWS(region:'us-west-2',credentials:'aws-static') {
+                       sh '''
+                         ~/create_cluster.sh
+                         aws eks --region us-west-2 update-kubeconfig --name alphabetsoup
+                         kubectl apply -f ~/cloud_devops_capstone/deployment.yaml
+                         kubectl apply -f ~/cloud_devops_capstone/load-balancer-service.yaml
+                       '''
+                  }
+            }    
+         }       
      }
 }
