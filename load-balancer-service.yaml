@@ -5,7 +5,7 @@ metadata:
   name: loadbalancer-service
 spec:
   selector:
-    app: soupvsalphabet
+    app: soup
   ports:
     - protocol: TCP
       port: 8000
