@@ -12,14 +12,6 @@ pipeline {
 
              }
          }
-         stage('install hadolint') {
-            steps {  
-                 sh '''
-                   sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64 &&\
-                   chmod +x /bin/hadolint
-                 '''
-            }     
-         }
          stage('Lint HTML') {
               steps {
                   sh 'tidy -q -e https://raw.githubusercontent.com/NovaVic/site_v1_for_canary_deployment/master/index.html'
