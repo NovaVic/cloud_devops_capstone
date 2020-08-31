@@ -1,30 +1,31 @@
 pipeline {
      agent any
      stages {
+          
          stage('checkout from version control system') {
              steps {
                  sh '''
-                   rm -rf ~/site_v1_for_canary_deployment
-                   rm -rf ~/site_v2_for_canary_deployment
-                   rm -rf ~/cloud_devops_capstone
-                   cd ~
+                   rm -rf /tmp/site_v1_for_canary_deployment
+                   rm -rf /tmp/site_v2_for_canary_deployment
+                   rm -rf /tmp/cloud_devops_capstone
+                   cd /tmp/
                    git clone https://github.com/NovaVic/site_v1_for_canary_deployment.git 
                    git clone https://github.com/NovaVic/site_v2_for_canary_deployment.git 
                    git clone https://github.com/NovaVic/cloud_devops_capstone.git
                 '''
 
              }
-         }
+         }/*
          stage('Lint HTML') {
               steps {
-                  sh 'tidy -q -e ~/site_v1_for_canary_deployment/index.html'
-                  sh 'tidy -q -e ~/site_v2_for_canary_deployment/index.html'
+                  sh 'tidy -q -e /tmp/site_v1_for_canary_deployment/index.html'
+                  sh 'tidy -q -e /tmp/site_v2_for_canary_deployment/index.html'
               }
          }
          stage('Lint Dockerfile') {
               steps {
-                  sh 'hadolint ~/site_v1_for_canary_deployment/Dockerfile'
-                  sh 'hadolint ~/site_v1_for_canary_deployment/Dockerfile'
+                  sh 'hadolint /tmp/site_v1_for_canary_deployment/Dockerfile'
+                  sh 'hadolint /tmp/site_v1_for_canary_deployment/Dockerfile'
               }
          }
          stage('Build and push Docker Image') {
@@ -40,23 +41,23 @@ pipeline {
                       //app.push("${env.BUILD_NUMBER}")
                       //app.push("latest")
 
-                        def image1 = docker.build("novavic/clouddevops_capstone-img-v1:1.0", "~/site_v1_for_canary_deployment/")
+                        def image1 = docker.build("novavic/clouddevops_capstone-img-v1:1.0", "/tmp/site_v1_for_canary_deployment/")
                         image1.push()
 
-                        def image2 = docker.build("novavic/clouddevops_capstone-img-v2:1.0", "~/site_v2_for_canary_deployment/")
+                        def image2 = docker.build("novavic/clouddevops_capstone-img-v2:1.0", "/tmp/site_v2_for_canary_deployment/")
                         image2.push()
                    } 
                  }
               }
-         }
+         }*/
          stage('create cluster and deploy app - using blue green deployment') {
             steps {
                   withAWS(region:'us-west-2',credentials:'aws-static') {
                        sh '''
-                         ~/cloud_devops_capstone/create_cluster.sh
+                         /tmp/cloud_devops_capstone/create_cluster.sh
                          aws eks --region us-west-2 update-kubeconfig --name alphabetsoup
-                         kubectl apply -f ~/cloud_devops_capstone/deployment.yaml
-                         kubectl apply -f ~/cloud_devops_capstone/load-balancer-service.yaml
+                         kubectl apply -f /tmp/cloud_devops_capstone/deployment.yaml
+                         kubectl apply -f /tmp/cloud_devops_capstone/load-balancer-service.yaml
                        '''
                   }
             }    
