@@ -50,7 +50,7 @@ pipeline {
                  }
               }
          }*/
-         stage('create cluster and deploy app - using blue green deployment') {
+         stage('create cluster and deploy app with blue green deployment') {
             steps {
                   withAWS(region:'us-west-2',credentials:'aws-static') {
                        sh '''
