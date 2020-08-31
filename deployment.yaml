@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: soupvsalphabet
+  labels:
+    app: soupvsalphabet
+spec:
+  type: Cluster
+  ports:
+  - port: 80
+    name: http
+  selector:
+    app: soupvsalphabet
+---
+apiVersion: v1.1
+kind: Deployment
+metadata:
+  name: soupvsalphabet-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: soupvsalphabet
+        version: v1
+    spec:
+      containers:
+      - name: soupvsalphabet
+        image:  novavic/clouddevops_capstone-img-v1:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1.2
+kind: Deployment
+metadata:
+  name: soupvsalphabet-v2
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: soupvsalphabet
+        version: v2
+    spec:
+      containers:
+      - name: soupvsalphabet
+        image:  novavic/clouddevops_capstone-img-v2:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
