@@ -39,7 +39,7 @@ pipeline {
                       //app.push("latest")
 
                         def image1 = docker.build("sk_clouddevops_capstone_img_v1:1.0", "~/site_v1_for_canary_deployment/")
-                        image1.push("sk_clouddevops_capstone_img_v1:1.0")
+                        image1.push()
 
                         def image2 = docker.build("sk_clouddevops_capstone_img_v2:1.0", "~/site_v2_for_canary_deployment/")
                         image2.push()
