@@ -13,7 +13,7 @@ spec:
     app: soupvsalphabet
 ---
 apiVersion: v1.1
-kind: Deployment
+kind: ReplicationController
 metadata:
   name: soup
 spec:
@@ -32,7 +32,7 @@ spec:
         - containerPort: 80
 ---
 apiVersion: v1.2
-kind: Deployment
+kind: ReplicationController
 metadata:
   name: alphabet
 spec:
