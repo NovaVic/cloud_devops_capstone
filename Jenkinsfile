@@ -57,6 +57,7 @@ pipeline {
                          chmod +x /tmp/cloud_devops_capstone/create-cluster.sh
                          /tmp/cloud_devops_capstone/create-cluster.sh
                          aws eks --region us-west-2 update-kubeconfig --name alphabetsoupv1
+                         kubectl config use-context alphabetsoupv1
                          kubectl apply -f /tmp/cloud_devops_capstone/deployment.yaml
                          kubectl apply -f /tmp/cloud_devops_capstone/load-balancer-service.yaml
                        '''
