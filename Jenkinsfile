@@ -11,10 +11,12 @@ pipeline {
              }
          }
          stage('install hadolint') {
-            sh '''
-              wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64 &&\
-              chmod +x /bin/hadolint
-            '''
+            steps {  
+                 sh '''
+                   wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64 &&\
+                   chmod +x /bin/hadolint
+                 '''
+            }     
          }
          stage('Lint HTML') {
               steps {
