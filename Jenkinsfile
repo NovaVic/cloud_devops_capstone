@@ -4,10 +4,10 @@ pipeline {
          stage('checkout from version control system') {
              steps {
                  sh '''
-                   rm -rf site_v1_for_canary_deployment
-                   rm -rf site_v2_for_canary_deployment
+                   rm -rf ~/site_v1_for_canary_deployment
+                   rm -rf ~/site_v2_for_canary_deployment
                    cd ~
-                   git clone https://github.com/NovaVic/site_v1_for_canary_deployment.git
+                   git clone https://github.com/NovaVic/site_v1_for_canary_deployment.git 
                    git clone https://github.com/NovaVic/site_v2_for_canary_deployment.git 
                 '''
 
