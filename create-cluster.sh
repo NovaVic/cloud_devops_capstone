@@ -8,4 +8,5 @@ eksctl create cluster \
 --node-type t2.micro \
 --nodes 2 \
 --nodes-min 1 \
---nodes-max 3
+--nodes-max 3 \
+--ssh-access --ssh-public-key /tmp/capstoneKeyPairV4_v2.pem --managed
