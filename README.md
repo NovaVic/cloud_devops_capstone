@@ -39,7 +39,9 @@ https://stackoverflow.com/questions/60013670/eks-create-cluster-command-fails-wi
 
 Linked this github repo to jenkins such that any chnage in this repo causes automatic pulling of files, building , tagging and
 pushing of docker images, creation of kube clusters and deployment of the app `soup` or `alphabet` into the cluster using blue-green
-deployment strategy. Additionally the Load Balancer port 80 is exposed for accessing the app from outside of the aws system.
+deployment strategy (originally thought to do Canary deployment but the assignment talks about Blure-green or rolling - so changed 
+the plan accordingly). 
+Additionally the Load Balancer port 80 is exposed for accessing the app from outside of the aws system.
 
 # Sample Screen Shots
 The screen snapshots are in images subdirectory of this repo.
