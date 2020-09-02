@@ -28,7 +28,7 @@ pipeline {
                   sh 'hadolint /tmp/site_v1_for_canary_deployment/Dockerfile'
               }
          }
-         stage('Build and push Docker Image') {
+         stage('Build and push Docker Image - testing') {
               steps {
                   // For more info go to: 
                   // https://stackoverflow.com/a/58953352
