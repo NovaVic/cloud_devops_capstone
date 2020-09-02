@@ -5,7 +5,7 @@ metadata:
   name: alphsoupv1-lb-service
 spec:
   selector:
-    app: soup
+    app: alphabet
   ports:
     - name: http
       protocol: TCP
