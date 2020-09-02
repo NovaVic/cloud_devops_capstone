@@ -1,7 +1,6 @@
 pipeline {
      agent any
      stages {
-          /*
          stage('checkout from version control system') {
              steps {
                  sh '''
@@ -27,7 +26,7 @@ pipeline {
                   sh 'hadolint /tmp/site_v1_for_canary_deployment/Dockerfile'
               }
          }
-         stage('Build and push Docker Image') {
+         stage('Build, tag and push Docker Image') {
               steps {
                   // For more info go to: 
                   // https://stackoverflow.com/a/58953352
@@ -46,17 +45,25 @@ pipeline {
          } */
          stage('create cluster and deploy app with blue green deployment strategy') {
             steps {
+                  // using aws cred and IAM role that have enough permission to create , deploy
+                  // and manage clusters
                   withAWS(region:'us-west-2',credentials:'cloud-devops-capstone') {
                        sh '''
-                         # chmod +x /tmp/cloud_devops_capstone/create-cluster.sh
-                         #  /tmp/cloud_devops_capstone/create-cluster.sh
+                         chmod +x /tmp/cloud_devops_capstone/create-cluster.sh
+                         # creating cluster
+                         /tmp/cloud_devops_capstone/create-cluster.sh
                          aws eks --region us-west-2 update-kubeconfig --name alphabetsoupv1
-                         # kubectl create namespace alphabetsoupv1
-                         # kubectl apply -f /tmp/cloud_devops_capstone/deployment.yaml
-                         # kubectl apply -f /tmp/cloud_devops_capstone/load-balancer-service.yaml
+                         kubectl create namespace alphabetsoupv1
+                         # deploying 
+                         kubectl apply -f /tmp/cloud_devops_capstone/deployment.yaml
+                         # attaching load balancer service
+                         kubectl apply -f /tmp/cloud_devops_capstone/load-balancer-service.yaml
                          kubectl get deployments -n alphabetsoupv1
+                         # waiting for pods to be ready
                          kubectl wait --for=condition=ready pod --all  -n alphabetsoupv1
-                         kubectl expose deployment soup --type=LoadBalancer --name=alphsoupv1-lb-service -n alphabetsoupv1
+                         # imagine `soup` site is blue and `alphabet` site is green
+                         # exposing site 'alphabet' (site 'soup' is another possibility) for access from outside aws 
+                         kubectl expose deployment alphabet --type=LoadBalancer --name=alphsoupv1-lb-service -n alphabetsoupv1
                          kubectl describe services -n alphabetsoupv1
                          kubectl get pods -n alphabetsoupv1
                        '''
