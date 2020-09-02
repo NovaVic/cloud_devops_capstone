@@ -9,9 +9,9 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 8000
-      targetPort: 80
+      port: 80 # host port/port to be exposed to outside world
+      targetPort: 80 #container port
     - name: https
       protocol: TCP
-      port: 443
+      port: 8443
       targetPort: 443
