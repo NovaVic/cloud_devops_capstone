@@ -42,7 +42,7 @@ pipeline {
                    } 
                  }
               }
-         } */
+         } 
          stage('create cluster and deploy app with blue green deployment strategy') {
             steps {
                   // using aws cred and IAM role that have enough permission to create , deploy
