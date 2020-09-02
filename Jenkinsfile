@@ -8,7 +8,7 @@ pipeline {
                    rm -rf /tmp/site_v1_for_canary_deployment
                    rm -rf /tmp/site_v2_for_canary_deployment
                    rm -rf /tmp/cloud_devops_capstone
-                   cd /tmp/
+                   cd /tmp/           
                    git clone https://github.com/NovaVic/site_v1_for_canary_deployment.git 
                    git clone https://github.com/NovaVic/site_v2_for_canary_deployment.git 
                    git clone https://github.com/NovaVic/cloud_devops_capstone.git
