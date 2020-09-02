@@ -1,4 +1,19 @@
 
+# Plan
+
+*  Used base nginx docker image and replaced the index file with soup related index page in one case (green)
+and alphabet related index page in another case (blue).
+
+
+* Initially thought about Canary but then later on went with Blue Green deployment Strategy.
+
+* Used Kubernetes service and deployment yaml and eksctl to make cluster and load balancer creation simpler.
+
+* Used source code and Docekrfile from these two repos:
+
+                   git clone https://github.com/NovaVic/site_v1_for_canary_deployment.git (assume source of blue)
+                   git clone https://github.com/NovaVic/site_v2_for_canary_deployment.git (assume source of green)
+
 # Pre-requisites:
 
 * Jenkins Installation - done as part of Project 3 of same course.
