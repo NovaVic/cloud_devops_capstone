@@ -15,7 +15,7 @@ pipeline {
                 '''
 
              }
-         }/*
+         }
          stage('Lint HTML') {
               steps {
                   sh 'tidy -q -e /tmp/site_v1_for_canary_deployment/index.html'
@@ -33,13 +33,8 @@ pipeline {
                   // For more info go to: 
                   // https://stackoverflow.com/a/58953352
                   // https://www.jenkins.io/doc/book/pipeline/docker/
-                  
-                  //sh 'Using Two Different Syntax while Building Images'
-                  //sh 'docker build -f ~/site_v1_for_canary_deployment/Dockerfile --tag=sk_clouddevops_capstone_img_v1 '
                  script {  
                    docker.withRegistry('https://registry.hub.docker.com', 'novavic-docker-hub-credentials') {
-                      //app.push("${env.BUILD_NUMBER}")
-                      //app.push("latest")
 
                         def image1 = docker.build("novavic/clouddevops_capstone-img-v1:1.0", "/tmp/site_v1_for_canary_deployment/")
                         image1.push()
@@ -49,21 +44,23 @@ pipeline {
                    } 
                  }
               }
-         }*/
-         stage('create cluster and deploy app with blue green deployment') {
+         }
+         stage('create cluster and deploy app with blue green deployment strategy') {
             steps {
                   withAWS(region:'us-west-2',credentials:'cloud-devops-capstone') {
                        sh '''
-                         kubectl create namespace alphabetsoupv1
+
                          chmod +x /tmp/cloud_devops_capstone/create-cluster.sh
                          /tmp/cloud_devops_capstone/create-cluster.sh
                          aws eks --region us-west-2 update-kubeconfig --name alphabetsoupv1
                          kubectl config use-context alphabetsoupv1
+                         kubectl create namespace alphabetsoupv1
                          kubectl apply -f /tmp/cloud_devops_capstone/deployment.yaml
                          kubectl apply -f /tmp/cloud_devops_capstone/load-balancer-service.yaml
                          kubectl get deployments -n alphabetsoupv1
                          kubectl expose deployment alphabetsoupv1 --type=LoadBalancer --name=alphsoupv1-lb-service -n alphabetsoupv1
                          kubectl describe services -n alphabetsoupv1
+                         kubectl get pods -n alphabetsoupv1
                        '''
                   }
             }    
