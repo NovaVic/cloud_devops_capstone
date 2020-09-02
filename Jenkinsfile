@@ -52,14 +52,17 @@ pipeline {
          }*/
          stage('create cluster and deploy app with blue green deployment') {
             steps {
-                  withAWS(region:'us-west-2',credentials:'aws-static') {
+                  withAWS(region:'us-west-2',credentials:'cloud-devops-capstone') {
                        sh '''
+                         kubectl create namespace alphabetsoupv1
                          chmod +x /tmp/cloud_devops_capstone/create-cluster.sh
                          /tmp/cloud_devops_capstone/create-cluster.sh
                          aws eks --region us-west-2 update-kubeconfig --name alphabetsoupv1
                          kubectl config use-context alphabetsoupv1
                          kubectl apply -f /tmp/cloud_devops_capstone/deployment.yaml
                          kubectl apply -f /tmp/cloud_devops_capstone/load-balancer-service.yaml
+                         kubectl expose deployment alphabetsoupv1 --type=LoadBalancer --name=alphsoupv1-lb-service -n alphabetsoupv1
+                         kubectl describe services -n alphabetsoupv1
                        '''
                   }
             }    
