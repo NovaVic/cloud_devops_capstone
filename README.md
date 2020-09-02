@@ -9,7 +9,10 @@ and alphabet related index page in another case (blue).
 
 * Used Kubernetes service and deployment yaml and eksctl to make cluster and load balancer creation simpler.
 
+* Used source code and Docekrfile from these two repos:
 
+                   git clone https://github.com/NovaVic/site_v1_for_canary_deployment.git (assume source of blue)
+                   git clone https://github.com/NovaVic/site_v2_for_canary_deployment.git (assume source of green)
 
 # Pre-requisites:
 
