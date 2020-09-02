@@ -1,4 +1,16 @@
 
+# Plan
+
+*  Used base nginx docker image and replaced the index file with soup related index page in one case (green)
+and alphabet related index page in another case (blue).
+
+
+* Initially thought about Canary but then later on went with Blue Green deployment Strategy.
+
+* Used Kubernetes service and deployment yaml and eksctl to make cluster and load balancer creation simpler.
+
+
+
 # Pre-requisites:
 
 * Jenkins Installation - done as part of Project 3 of same course.
