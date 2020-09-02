@@ -61,6 +61,7 @@ pipeline {
                          kubectl config use-context alphabetsoupv1
                          kubectl apply -f /tmp/cloud_devops_capstone/deployment.yaml
                          kubectl apply -f /tmp/cloud_devops_capstone/load-balancer-service.yaml
+                         kubectl get deployments -n alphabetsoupv1
                          kubectl expose deployment alphabetsoupv1 --type=LoadBalancer --name=alphsoupv1-lb-service -n alphabetsoupv1
                          kubectl describe services -n alphabetsoupv1
                        '''
