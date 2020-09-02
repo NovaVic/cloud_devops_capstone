@@ -28,7 +28,7 @@ pipeline {
                   sh 'hadolint /tmp/site_v1_for_canary_deployment/Dockerfile'
               }
          }
-         stage('Build and push Docker Image - testing') {
+         stage('Build and push Docker Image') {
               steps {
                   // For more info go to: 
                   // https://stackoverflow.com/a/58953352
@@ -49,7 +49,6 @@ pipeline {
             steps {
                   withAWS(region:'us-west-2',credentials:'cloud-devops-capstone') {
                        sh '''
-
                          chmod +x /tmp/cloud_devops_capstone/create-cluster.sh
                          /tmp/cloud_devops_capstone/create-cluster.sh
                          aws eks --region us-west-2 update-kubeconfig --name alphabetsoupv1
