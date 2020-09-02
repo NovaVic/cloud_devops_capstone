@@ -25,7 +25,7 @@ sudo systemctl start jenkins
 
 sudo systemctl status jenkins
 
-* Added  blue ocean plugin, docker hub plugin into Jenkins, installed docker, aws cli, kubectl
+* Added  blue ocean plugin, docker hub plugin into Jenkins, installed docker, aws cli, kubectl, lint, hadolint
 * Added IAM user cloud-devops-capstone
 * Added security credentials for cloud-devops-capstone and docker hub in jenkins creentials section
 * Added jenkins user to docker group
