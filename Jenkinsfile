@@ -1,7 +1,6 @@
 pipeline {
      agent any
      stages {
-          
          stage('checkout from version control system') {
              steps {
                  sh '''
@@ -13,7 +12,6 @@ pipeline {
                    git clone https://github.com/NovaVic/site_v2_for_canary_deployment.git 
                    git clone https://github.com/NovaVic/cloud_devops_capstone.git
                 '''
-
              }
          }
          stage('Lint HTML') {
@@ -44,7 +42,7 @@ pipeline {
                    } 
                  }
               }
-         }
+         } 
          stage('create cluster and deploy app with blue green deployment strategy') {
             steps {
                   withAWS(region:'us-west-2',credentials:'cloud-devops-capstone') {
