@@ -48,12 +48,12 @@ pipeline {
             steps {
                   withAWS(region:'us-west-2',credentials:'cloud-devops-capstone') {
                        sh '''
-                        // chmod +x /tmp/cloud_devops_capstone/create-cluster.sh
-                       //  /tmp/cloud_devops_capstone/create-cluster.sh
+                         # chmod +x /tmp/cloud_devops_capstone/create-cluster.sh
+                         #  /tmp/cloud_devops_capstone/create-cluster.sh
                          aws eks --region us-west-2 update-kubeconfig --name alphabetsoupv1
-                        // kubectl create namespace alphabetsoupv1
-                        // kubectl apply -f /tmp/cloud_devops_capstone/deployment.yaml
-                        // kubectl apply -f /tmp/cloud_devops_capstone/load-balancer-service.yaml
+                         # kubectl create namespace alphabetsoupv1
+                         # kubectl apply -f /tmp/cloud_devops_capstone/deployment.yaml
+                         # kubectl apply -f /tmp/cloud_devops_capstone/load-balancer-service.yaml
                          kubectl get deployments -n alphabetsoupv1
                          kubectl expose deployment soup --type=LoadBalancer --name=alphsoupv1-lb-service -n alphabetsoupv1
                          kubectl describe services -n alphabetsoupv1
