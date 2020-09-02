@@ -11,8 +11,8 @@ and alphabet related index page in another case (blue).
 
 * Used source code and Docekrfile from these two repos:
 
-                   git clone https://github.com/NovaVic/site_v1_for_canary_deployment.git (assume source of blue)
-                   git clone https://github.com/NovaVic/site_v2_for_canary_deployment.git (assume source of green)
+                  https://github.com/NovaVic/site_v1_for_canary_deployment.git (assume source of blue)
+                  https://github.com/NovaVic/site_v2_for_canary_deployment.git (assume source of green)
 
 # Pre-requisites:
 
